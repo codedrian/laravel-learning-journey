@@ -9,7 +9,11 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-<x-nav-bar/>
-<h1 class="text-red-600">This is about</h1>
+<x-nav-bar :pageName="$pageName"/>
+@if ($pageName === 'About')
+    <h4>You're in the About page</h4>
+@else
+    <h4>You're not in the About page</h4>
+@endif
 </body>
 </html>

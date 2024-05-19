@@ -10,7 +10,11 @@
     <title>Home</title>
 </head>
 <body>
-<x-nav-bar/>
-<h1 class="text-red-600">This is home</h1>
+<x-nav-bar :pageName="$pageName"/>
+@if ($pageName === 'Home')
+    <h4>You're in the Home page</h4>
+@else
+    <h4>You're not in the Home page</h4>
+@endif
 </body>
 </html>

@@ -1,23 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
+use Illuminate\Routing\Controller;
 
 class UserController extends Controller
 {
     public function showAbout()
     {
-        return view('about');
+        $pageName = 'About';
+        $nameLength = strlen($pageName);
+        return view('about')->with('pageName', $pageName)->with('nameLength', $nameLength);
     }
+
     public function showContact()
     {
-        return view('contact');
+        $pageName = 'Contact';
+        $nameLength = strlen($pageName);
+        return view('contact')->with('pageName', $pageName)->with('nameLength', $nameLength);
     }
 
     public function showHome()
     {
-        return view('home');
+        $pageName = 'Home';
+        $nameLength = strlen($pageName);
+        return view('home')->with('pageName', $pageName)->with('nameLength', $nameLength);
     }
 }
