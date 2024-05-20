@@ -11,3 +11,8 @@
 #
 
 - I discovered hot to display the form errors. I can use the `@error` directive to display the error message for a given field. This directive is useful because it allows me to display the error message for a given field.
+- I learned how to create and display a flash data using the `flash` method. The syntax is: 
+    ```
+    $request->session()->flash('status', 'Task was successful!');
+    session('status') //To get the flash data
+    ```
