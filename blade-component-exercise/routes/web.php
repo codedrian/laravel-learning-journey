@@ -3,6 +3,8 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/home', [UserController::class, 'showHome']);
-Route::get('/about', [UserController::class, 'showAbout']);
-Route::get('/contact', [UserController::class, 'showContact']);
+Route::controller(UserController::class)->prefix('user')->group(function() {
+    Route::get('/home', 'showHome')->name('home');
+    Route::get('/about', 'showAbout')->name('about');
+    Route::get('/contact', 'showContact')->name('contact');
+});
