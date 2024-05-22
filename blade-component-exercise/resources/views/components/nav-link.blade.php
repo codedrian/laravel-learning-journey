@@ -9,8 +9,9 @@
     <title>Document</title>
 </head>
 <body>
-<a href="{{ $href }}" class="{{ $activePage ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700'}} no-underline hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-aria-current="{{ $activePage ? 'page' : 'false' }}">
-    {{ $slot }}</a>
+@props(['activePage' => false])
+    <a  class="{{ $activePage ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700'}} no-underline hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+    aria-current="{{ $activePage ? 'page' : 'false' }}" {{ $attributes }}>
+        {{ $slot }}</a>
 </body>
 </html>

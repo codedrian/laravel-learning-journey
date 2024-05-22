@@ -11,5 +11,6 @@
 <body>
 <x-nav-bar></x-nav-bar>
 <p>Hiya from Home page</p>
+
 </body>
 </html>

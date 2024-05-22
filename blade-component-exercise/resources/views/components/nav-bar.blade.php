@@ -31,9 +31,10 @@
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <x-nav-link href="{{ route('home') }}" :activePage="request()->is('user/home')">Home</x-nav-link>
+                        <x-nav-link href="{{ route('home') }}" :activePage="request()->is('user/home')" >Home</x-nav-link>
                         <x-nav-link href="{{ route('about') }}" :activePage="request()->is('user/about')">About</x-nav-link>
                         <x-nav-link href="{{ route('contact') }}" :activePage="request()->is('user/contact')">Contact</x-nav-link>
+                        <x-nav-link href="{{ route('job') }}" :activePage="request()->is('user/job')">Jobs</x-nav-link>
                     </div>
                 </div>
             </div>
@@ -51,3 +52,4 @@
         </div>
     </div>
 </nav>
+{{ $heading ?? '' }}

@@ -11,5 +11,6 @@
 <body>
 <x-nav-bar></x-nav-bar>
 <p>Hello from About page.</p>
+
 </body>
 </html>
