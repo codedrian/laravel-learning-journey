@@ -8,7 +8,12 @@ use Illuminate\View\Component;
 
 class BetForm extends Component
 {
-    public string $betRisk, $minPrize, $maxPrize;
+    public string $betRisk;
+
+    public string $minPrize;
+
+    public string $maxPrize;
+
     public function __construct($betRisk, $minPrize, $maxPrize)
     {
         $this->betRisk = $betRisk;
