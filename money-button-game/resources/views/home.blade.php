@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
+            /*TODO: Fetch the bet history and append it to the screen when the windows is ready*/
             $("form[name='betForm']").on('submit', function(event) {
                 let action = $("form[name='betForm']").attr('action');
                 event.preventDefault();
@@ -22,18 +23,24 @@
                     contentType: false,
                     processData: false,
                     success: function (response) {
-                        alert(response);
+                        console.log(response);
+                        let result = response.betResults;
+                        $('#money').text('Your money:' + result.currentMoney);
+                        $('#betHistory').append(`<li>You pushed ${result.betRisk} risk. The value is ${result.prize}. Your current money now is ${result.currentMoney}</li>`);
                     },
                     error: function(xhr, status, error) {
                         console.log('Error:', status, error);
                     }
                 });
             });
+            {{--@foreach( as $bet)
+                $('#betHistory').append($bet);
+            @endforeach--}}
         });
     </script>
 </head>
 <body>
-<h1>Your money: {{ session('money') }}</h1>
+<h1 id="money">Your money: {{ session('money') }}</h1>
 
 @php
     $bets = [
@@ -48,5 +55,9 @@
         <x-bet-form betRisk="{{ $bet['betRisk'] }}" minPrize="{{ $bet['minPrize'] }}" maxPrize="{{ $bet['maxPrize'] }}"/>
     @endforeach
 </div>
+<h3>Game host:</h3>
+<section class="outline">
+    <ul id="betHistory"></ul>
+</section>
 </body>
 </html>
