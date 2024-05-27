@@ -28,7 +28,7 @@ class UserController extends Controller
             } elseif ($betRisk === 'high') {
                 $prize = rand(-500, 2500);
             } elseif ($betRisk === 'severe') {
-                $prize = /*rand(-3000, 5000)*/ -700;
+                $prize = rand(-3000, 5000);
             }
             $totalMoney = $money + $prize;
             session(['money' => $totalMoney]);
