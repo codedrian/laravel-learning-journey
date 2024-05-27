@@ -69,11 +69,11 @@
     </script>
 </head>
 <body>
-<h1>Your money: <span id="money">{{ session()->has('money') ? session('money') : '500'}}</span></h1>
+<h1 class="inline-block">Your money: <span id="money">{{ session()->has('money') ? session('money') : '500'}}</span></h1>
 
-<form action="{{ route('destroyBet') }}" method="POST" name="resetBetForm">
+<form action="{{ route('destroyBet') }}" method="POST" name="resetBetForm" class="inline-block">
     @csrf
-    <input type="submit" value="reset">
+    <input type="submit" value="reset" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-4 py-1 text-center me-2 ml-5">
 </form>
 
 @php
@@ -84,7 +84,7 @@
     ['betRisk' => 'severe', 'minPrize' => -3000, 'maxPrize' => 5000]
 ];
 @endphp
-<div class="flex">
+<div class="flex justify-around">
     @foreach($bets as $bet)
         <x-bet-form betRisk="{{ $bet['betRisk'] }}" minPrize="{{ $bet['minPrize'] }}" maxPrize="{{ $bet['maxPrize'] }}"/>
     @endforeach
