@@ -8,6 +8,9 @@
     @vite('resources/css/app.css')
     <title>Money Button Game</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    {{--toastr cdn--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         $(document).ready(function(){
             $("form[name='betForm']").on('submit', function(event) {
@@ -24,24 +27,43 @@
                     success: function (response) {
                         console.log(response);
                         let result = response.betResults;
-                        $('#money').text(result.currentMoney);
+                        let money = result.currentMoney;
+                        $('#money').text(money);
                         $('#betHistory').append(`<li class="${result.prize > 0 ? 'text-green-600' : 'text-red-600'} "><span class='mr-5'>${result['submitted_at']}</span>You pushed ${result.betRisk} risk. The value is ${result.prize}. Your current money now is ${result.currentMoney}</li>`);
                         $('#gameHostIntro').remove();
+                        isGameOver(money, result.prize);
                     },
                     error: function(xhr, status, error) {
                         console.log('Error:', status, error);
                     }
                 });
             });
-            isGameOver();
 
-            function isGameOver() {
-                let currentMoney = {{ session()->has('money') ?? session('money')}}
-                if (currentMoney < 50)
+
+            function isGameOver(money, prize) {
+                if (money < 50)
                 {
-                    alert("Oh no, looks like you're running out of money! Take a break so you can play again later.");
+                    toastr['error'](`Oh no, you lose ${prize} looks like you're running out of money! Take a break so you can play again later.`);
                     $(".submitBet").addClass('pointer-events-none');
+
                 }
+            }
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "10000",
+                "hideDuration": "2000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
             }
         });
     </script>
