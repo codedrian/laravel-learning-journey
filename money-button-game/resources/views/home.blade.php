@@ -33,6 +33,16 @@
                     }
                 });
             });
+            isGameOver();
+
+            function isGameOver() {
+                let currentMoney = {{ session()->has('money') ?? session('money')}}
+                if (currentMoney < 50)
+                {
+                    alert("Oh no, looks like you're running out of money! Take a break so you can play again later.");
+                    $(".submitBet").addClass('pointer-events-none');
+                }
+            }
         });
     </script>
 </head>
