@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -13,10 +14,9 @@ class UserController extends Controller
     }
     public function processBet(Request $request)
     {
-        /*$request->session()->flush();*/
         if (!$request->session()->has('money')) {
             session(['money' => 500]);
-        } else {
+        }
             $betRisk = $request->input('bet');
             $money = session('money');
             $prize = 0;
@@ -32,18 +32,20 @@ class UserController extends Controller
             }
             $totalMoney = $money + $prize;
             session(['money' => $totalMoney]);
+            $submitted_at = Carbon::now('Asia/Manila')->format('l, F jS Y \a\t g:i A');
 
             $betResults = [
                 'currentMoney' => session('money'),
                 'prize' => $prize,
-                'betRisk' => $betRisk
+                'betRisk' => $betRisk,
+                'submitted_at' => $submitted_at
             ];
             if ($request->session()->missing('bet_history')) {
                 $request->session()->put('bet_history', []);
             }
             $request->session()->push('bet_history', $betResults);
             $betHistory = $request->session()->get('bet_history');
-        }
+
         return response()->json([
             'betResults' => $betResults,
             'betHistory' => $betHistory

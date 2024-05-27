@@ -25,8 +25,8 @@
                     success: function (response) {
                         console.log(response);
                         let result = response.betResults;
-                        $('#money').text('Your money:' + result.currentMoney);
-                        $('#betHistory').append(`<li>You pushed ${result.betRisk} risk. The value is ${result.prize}. Your current money now is ${result.currentMoney}</li>`);
+                        $('#money').text(result.currentMoney);
+                        $('#betHistory').append(`<li class="${result.prize > 0 ? 'text-green-600' : 'text-red-600'} "><span class='mr-5'>${result['submitted_at']}</span>You pushed ${result.betRisk} risk. The value is ${result.prize}. Your current money now is ${result.currentMoney}</li>`);
                     },
                     error: function(xhr, status, error) {
                         console.log('Error:', status, error);
@@ -40,7 +40,11 @@
     </script>
 </head>
 <body>
-<h1 id="money">Your money: {{ session('money') }}</h1>
+@if(session()->has('money'))
+    <h1>Your money: <span id="money">{{ session('money') }}</span></h1>
+@else
+    <h1>Your money: 500</h1>
+@endif
 
 @php
     $bets = [
@@ -57,7 +61,14 @@
 </div>
 <h3>Game host:</h3>
 <section class="outline">
-    <ul id="betHistory"></ul>
+    <ul class="list-none" id="betHistory">
+        @if(session()->has('bet_history'))
+            @foreach(session('bet_history') as $bet)
+                <li class="{{ $bet['prize'] > 0 ? 'text-green-600' : 'text-red-600'}}"><span class="mr-5">{{ $bet['submitted_at'] }}</span>You pushed {{ $bet['betRisk'] }} risk. The value is {{ $bet['prize'] }}. Your current money now is
+                    {{ $bet['currentMoney'] }}</li>
+            @endforeach
+        @endif
+    </ul>
 </section>
 </body>
 </html>
