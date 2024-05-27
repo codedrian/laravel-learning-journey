@@ -26,6 +26,7 @@
                         let result = response.betResults;
                         $('#money').text(result.currentMoney);
                         $('#betHistory').append(`<li class="${result.prize > 0 ? 'text-green-600' : 'text-red-600'} "><span class='mr-5'>${result['submitted_at']}</span>You pushed ${result.betRisk} risk. The value is ${result.prize}. Your current money now is ${result.currentMoney}</li>`);
+                        $('#gameHostIntro').remove();
                     },
                     error: function(xhr, status, error) {
                         console.log('Error:', status, error);
@@ -36,11 +37,7 @@
     </script>
 </head>
 <body>
-@if(session()->has('money'))
-    <h1>Your money: <span id="money">{{ session('money') }}</span></h1>
-@else
-    <h1>Your money: 500</h1>
-@endif
+<h1>Your money: <span id="money">{{ session()->has('money') ? session('money') : '500'}}</span></h1>
 
 <form action="{{ route('destroyBet') }}" method="POST" name="resetBetForm">
     @csrf
@@ -61,7 +58,8 @@
     @endforeach
 </div>
 <h3>Game host:</h3>
-<section class="outline">
+<section class="outline {{ session()->has('bet_history') ? '' : 'min-h-10' }}">
+    <p id="gameHostIntro" class="{{ session()->has('bet_history') ? 'hidden' : ''}}">Are you ready to win big? Try your luck and bet now! You could be the next big winner!</p>
     <ul class="list-none" id="betHistory">
         @if(session()->has('bet_history'))
             @foreach(session('bet_history') as $bet)
