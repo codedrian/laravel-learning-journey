@@ -10,7 +10,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            /*TODO: Fetch the bet history and append it to the screen when the windows is ready*/
             $("form[name='betForm']").on('submit', function(event) {
                 let action = $("form[name='betForm']").attr('action');
                 event.preventDefault();
@@ -33,9 +32,6 @@
                     }
                 });
             });
-            {{--@foreach( as $bet)
-                $('#betHistory').append($bet);
-            @endforeach--}}
         });
     </script>
 </head>
@@ -45,6 +41,11 @@
 @else
     <h1>Your money: 500</h1>
 @endif
+
+<form action="{{ route('destroyBet') }}" method="POST" name="resetBetForm">
+    @csrf
+    <input type="submit" value="reset">
+</form>
 
 @php
     $bets = [

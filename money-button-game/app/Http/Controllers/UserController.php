@@ -51,4 +51,10 @@ class UserController extends Controller
             'betHistory' => $betHistory
         ]);
     }
+
+    public function destroyBet(Request $request)
+    {
+        $request->session()->flush();
+        return redirect()->back();
+    }
 }
