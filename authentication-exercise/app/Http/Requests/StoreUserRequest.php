@@ -34,7 +34,8 @@ class StoreUserRequest extends FormRequest
     {
         /*TODO: Add unique in the email validator*/
         return [
-            'email' => 'required|email',
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
             'password_confirmation' => 'required',
             'terms' => 'required|accepted'

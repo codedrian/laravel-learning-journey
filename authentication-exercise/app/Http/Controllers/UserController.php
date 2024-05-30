@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -16,6 +17,8 @@ class UserController extends Controller
     public function storeUser(StoreUserRequest $request)
     {
         $validated = $request->validated();
-        /*Go to model*/
+        $user = new User();
+        $createdUser = $user->storeUser($validated);
+        dd($createdUser);
     }
 }

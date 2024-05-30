@@ -44,4 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function storeUser($userData)
+    {
+        return User::create($userData);
+    }
 }
