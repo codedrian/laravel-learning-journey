@@ -9,11 +9,17 @@
     <title>Document</title>
 </head>
 <body>
+
 <x-nav-bar>
   <x-slot:heading>
   </x-slot:heading>
 </x-nav-bar>
 <div>
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
     <p><span class="font-bold">Job details:</span> {{ $job['responsibilities'] }}</p>
     @if(Arr::has($job, 'salary'))
         <p><span class="font-bold">Salary:</span> {{ $job['salary'] }}</p>
