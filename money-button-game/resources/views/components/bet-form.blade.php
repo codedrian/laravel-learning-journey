@@ -5,5 +5,5 @@
     <input type="hidden" name="bet" value="{{ $betRisk }}">
     <label for="bet">{{ $betRisk }}</label>
     <p>by {{ $minPrize }} up to {{ $maxPrize }}</p>
-    <input type="submit">
+    <input type="submit" class="submitBet">
 </form>

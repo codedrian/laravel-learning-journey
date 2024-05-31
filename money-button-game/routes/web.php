@@ -7,3 +7,4 @@ Route::get('/', function () {
     return view('home');
 });
 Route::post('/process-bet', [UserController::class, 'processBet'])->name('processBet');
+Route::post('/reset-game', [UserController::class, 'destroyBet'])->name('destroyBet');
