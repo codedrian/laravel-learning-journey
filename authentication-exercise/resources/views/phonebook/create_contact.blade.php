@@ -9,6 +9,12 @@
     <title>Phonebook</title>
 </head>
 <body>
+@if($errors->any())
+    <ul class="text-red-600">
+        @foreach ($errors->all() as $error)
+            <li >{{ $error }}</li>
+        @endforeach
+    </ul>@endif
 <x-phonebook.contact_form action="{{ route('store-contact') }}" method="post"/>
 </body>
 </html>

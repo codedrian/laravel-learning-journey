@@ -11,7 +11,7 @@ class StoreContactRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -19,10 +19,21 @@ class StoreContactRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    public function prepareForValidation()
+    {
+        $input = $this->all();
+        $input = array_map(function($value) {
+            if(is_string($value)) {
+                return trim(strip_tags($value));
+            }
+        }, $input);
+        $this->replace($input);
+    }
     public function rules(): array
     {
         return [
-            //TODO: Add validation and sanitation
+            'name' => 'required',
+            'contact_number' => 'required|string|unique:phone_books,contact_number'
         ];
     }
 }
