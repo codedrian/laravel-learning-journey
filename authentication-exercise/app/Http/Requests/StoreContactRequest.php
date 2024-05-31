@@ -22,7 +22,7 @@ class StoreContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            //TODO: Add validation and sanitation
         ];
     }
 }
