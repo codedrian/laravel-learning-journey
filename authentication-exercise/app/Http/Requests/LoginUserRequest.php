@@ -22,16 +22,17 @@ class LoginUserRequest extends FormRequest
     public function prepareForValidation()
     {
         $input = $this->all();
-        $input = array_map(function($value) {
+        $input = array_map(function ($value) {
             return trim(strip_tags($value));
         }, $input);
         $this->replace($input);
     }
+
     public function rules(): array
     {
         return [
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ];
     }
 }
