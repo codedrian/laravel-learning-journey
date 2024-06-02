@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
     Route::get('/signin', [UserController::class, 'showSignIn'])->name('signin');
     Route::get('/login', [UserController::class, 'showLogIn'])->name('login');
     Route::get('/contact', [PhoneBookController::class, 'getUserContacts']);
-    Route::get('/getContactById/{id}', [PhoneBookController::class, 'getContactById']);
+    Route::get('/contact/{id}', [PhoneBookController::class, 'getContactById']);
