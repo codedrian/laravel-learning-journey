@@ -12,7 +12,9 @@ class PhoneBookFactory extends Factory
     public function definition(): array
     {
         return [
-
+            'name' => fake()->name(),
+            'user_id' => fake()->numberBetween(1, 5),
+            'contact_number' => fake()->numerify('09#######')
         ];
     }
 }
