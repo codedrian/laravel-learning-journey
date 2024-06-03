@@ -13,11 +13,11 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-
     public function showSignIn(): View
     {
         return view('auth.signin');
     }
+
     public function showLogIn(): View
     {
         return view('login');
@@ -40,14 +40,22 @@ class UserController extends Controller
 
             return redirect()->intended('/');
         }
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
 
-    public function showDashboard(): View
+    /*  public function showDashboard(): View
+      {
+          return view('dashboard');
+      }*/
+    public function getUserContacts()
     {
-        return view('dashboard');
+        $user = Auth::id();
+        $contacts = (new User())->getUserContacts($user);
+
+        return view('dashboard', compact('contacts'));
     }
 
     public function logout(Request $request)
@@ -60,8 +68,7 @@ class UserController extends Controller
     }
 
     /**
-     * @param LoginUserRequest $request
-     * @return mixed
+     * @param  LoginUserRequest  $request
      */
     public function getValidated(FormRequest $request): mixed
     {

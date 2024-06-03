@@ -35,6 +35,7 @@ class StoreContactRequest extends FormRequest
         return [
             'name' => 'required',
             'contact_number' => 'required|string|unique:phone_books,contact_number',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 }

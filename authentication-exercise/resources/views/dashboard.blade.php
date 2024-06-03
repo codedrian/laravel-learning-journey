@@ -12,14 +12,15 @@
             $('#profile').on('click', function() {
                 $('#profile-dropdown').toggle();
             })
-            /*TODO: Fetch the Phonebook::showContact()*/
+
         });
     </script>
 </head>
 <body>
 <x-navbar></x-navbar>
-<p>Welcome {{ Auth::user()->name }}. Your ID is <span class="bg-red-200">{{ Auth::user()->id }}</span>.</p>
 <h1>Contacts</h1>
+<x-contact-table :contacts="$contacts"/>
+
 
 </body>
 </html>

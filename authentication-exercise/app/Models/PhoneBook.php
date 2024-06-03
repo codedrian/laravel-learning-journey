@@ -2,12 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Facades\Auth;
-
 
 class PhoneBook extends Model
 {
@@ -18,17 +14,9 @@ class PhoneBook extends Model
         'contact_number',
     ];
 
-    public function storeContact($contactData, $userId)
+    public function storeContact($contactData)
     {
-        $contactData['user_id'] = $userId;
         return PhoneBook::create($contactData);
-    }
-
-
-    public function getUserContacts($user): Collection
-    {
-
-        return PhoneBook::where('user_id', $user)->get();
     }
 
     public function getContactById($id)

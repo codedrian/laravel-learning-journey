@@ -14,7 +14,7 @@ class PhoneBookFactory extends Factory
         return [
             'name' => fake()->name(),
             'user_id' => fake()->numberBetween(1, 5),
-            'contact_number' => fake()->numerify('09#######')
+            'contact_number' => fake()->numerify('09#######'),
         ];
     }
 }

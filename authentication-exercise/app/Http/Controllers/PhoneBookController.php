@@ -20,20 +20,16 @@ class PhoneBookController extends Controller
         $validated = $request->validated();
         $userId = Auth::id();
         $phone_book = new PhoneBook();
-        $phone_book->storeContact($validated, $userId);
+        $phone_book->storeContact($validated);
+
         return redirect()->back();
     }
 
-    public function getUserContacts()
-    {
-        $user = Auth::id();
-        $result = (new PhoneBook())->getUserContacts($user);
-        return response()->json($result);
-    }
-/** This method is to get a specific contact*/
+    /** This method is to get a specific contact*/
     public function getContactById($id)
     {
-        $result = (new PhoneBook())->getContactById($id, $user);
+        $result = (new PhoneBook())->getContactById($id);
+
         return response()->json($result);
     }
 }
