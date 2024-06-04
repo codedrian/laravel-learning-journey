@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginUserRequest extends FormRequest
+class DestroyContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,20 +19,10 @@ class LoginUserRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function prepareForValidation()
-    {
-        $input = $this->all();
-        $input = array_map(function ($value) {
-            return trim(strip_tags($value));
-        }, $input);
-        $this->replace($input);
-    }
-
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required',
+            'id' => 'required'
         ];
     }
 }

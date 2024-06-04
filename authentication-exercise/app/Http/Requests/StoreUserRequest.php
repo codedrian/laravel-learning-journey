@@ -24,12 +24,13 @@ class StoreUserRequest extends FormRequest
     {
         /*to get all the input*/
         $input = $this->all();
-        $input = array_map(function($value){
+        $input = array_map(function ($value) {
             return trim(strip_tags($value));
         }, $input);
         $input['email'] = strtolower($input['email']);
         $this->replace($input);
     }
+
     public function rules(): array
     {
         /*TODO: Add unique in the email validator*/
@@ -38,7 +39,7 @@ class StoreUserRequest extends FormRequest
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
             'password_confirmation' => 'required',
-            'terms' => 'required|accepted'
+            'terms' => 'required|accepted',
         ];
     }
 }

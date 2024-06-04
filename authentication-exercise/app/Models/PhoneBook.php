@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PhoneBook extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -16,9 +17,31 @@ class PhoneBook extends Model
         'user_id'
     ];
 
-    public function storeContact($contactData,  $userId)
+    public function storeContact($contactData)
     {
-        $contactData['user_id'] = $userId;
         return PhoneBook::create($contactData);
+    }
+
+    public function getContactById($id)
+    {
+        $contact = PhoneBook::find($id);
+        if ($contact && $contact->user_id !== auth()->id()) {
+            abort(403, 'Not found');
+        }
+        return $contact;
+    }
+
+    public function destroyContact($id): array
+    {
+        $affectedRows = $this->where('id', $id)->delete();
+        if($affectedRows) {
+            return [
+                'message' => 'Contact deleted'
+            ];
+        } else {
+            return [
+              'message' => 'Contact cannot delete'
+            ];
+        }
     }
 }

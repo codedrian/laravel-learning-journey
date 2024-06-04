@@ -9,7 +9,7 @@
     <title>login</title>
 </head>
 <body>
-<section class="bg-gray-50 dark:bg-gray-900">
+<section class="bg-blue-100">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -46,7 +46,7 @@
                         </div>
                         <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                     </div>
-                    <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                    <button type="submit" class="w-full text-white hover:bg-blue-700 bg-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Sign in</button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                         Don’t have an account yet? <a href="{{ route('signin') }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                     </p>

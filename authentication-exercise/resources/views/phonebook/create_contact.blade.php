@@ -9,6 +9,7 @@
     <title>Phonebook</title>
 </head>
 <body>
+<x-navbar />
 @if($errors->any())
     <ul class="text-red-600">
         @foreach ($errors->all() as $error)

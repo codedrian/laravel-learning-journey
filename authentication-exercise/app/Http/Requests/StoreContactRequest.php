@@ -22,18 +22,20 @@ class StoreContactRequest extends FormRequest
     public function prepareForValidation()
     {
         $input = $this->all();
-        $input = array_map(function($value) {
-            if(is_string($value)) {
+        $input = array_map(function ($value) {
+            if (is_string($value)) {
                 return trim(strip_tags($value));
             }
         }, $input);
         $this->replace($input);
     }
+
     public function rules(): array
     {
         return [
             'name' => 'required',
-            'contact_number' => 'required|string|unique:phone_books,contact_number'
+            'contact_number' => 'required|string|unique:phone_books,contact_number',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 }
