@@ -44,4 +44,25 @@ class PhoneBook extends Model
             ];
         }
     }
+
+    public function editContact($contactData): array
+    {
+        $contact = $this->find($contactData['id'])
+            ->update([
+                'name' => $contactData['name'],
+                'contact_number' => $contactData['contact_number']
+            ]);
+        if($contact) {
+            return [
+                'message' => 'Contact updated',
+                'contact_number' => $contactData['contact_number'],
+                'name' => $contactData['name']
+            ];
+        } else {
+            return [
+                'message' => 'Contact cannot update'
+            ];
+        }
+
+    }
 }

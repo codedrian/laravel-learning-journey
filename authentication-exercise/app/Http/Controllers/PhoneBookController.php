@@ -6,8 +6,8 @@ use App\Http\Requests\DestroyContactRequest;
 use App\Http\Requests\StoreContactRequest;
 use App\Models\PhoneBook;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Illuminate\View\View;
 
 class PhoneBookController extends Controller
@@ -38,12 +38,17 @@ class PhoneBookController extends Controller
     {
         $validated = $request->validated();
         $response = (new PhoneBook())->destroyContact($validated);
-
         return response()->json($response);
     }
 
     public function editContact(Request $request)
     {
-        dd($request);
+        $validated = $request->validate([
+            'id' => 'required|integer',
+            'name' => 'required|string',
+            'contact_number' => 'required|integer'
+        ]);
+        $response = (new PhoneBook())->editContact($validated);
+        return response()->json($response);
     }
 }
