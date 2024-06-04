@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DestroyContactRequest;
 use App\Http\Requests\StoreContactRequest;
 use App\Models\PhoneBook;
 use Illuminate\Http\RedirectResponse;
@@ -18,7 +19,6 @@ class PhoneBookController extends Controller
     public function storeContact(StoreContactRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-        $userId = Auth::id();
         $phone_book = new PhoneBook();
         $phone_book->storeContact($validated);
 
@@ -31,5 +31,13 @@ class PhoneBookController extends Controller
         $result = (new PhoneBook())->getContactById($id);
 
         return response()->json($result);
+    }
+
+    public function destroyContact(DestroyContactRequest $request)
+    {
+        $validated = $request->validated();
+        $response = (new PhoneBook())->destroyContact($validated);
+
+        return response()->json($response);
     }
 }

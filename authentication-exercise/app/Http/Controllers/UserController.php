@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+
 class UserController extends Controller
 {
     public function showSignIn(): View
@@ -46,15 +47,10 @@ class UserController extends Controller
         ])->onlyInput('email');
     }
 
-    /*  public function showDashboard(): View
-      {
-          return view('dashboard');
-      }*/
     public function getUserContacts()
     {
         $user = Auth::id();
         $contacts = (new User())->getUserContacts($user);
-
         return view('dashboard', compact('contacts'));
     }
 
