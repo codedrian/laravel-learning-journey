@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 /*TODO: Put the homepage here*/
 Route::get('/', [UserController::class, 'getUserContacts'])->name('dashboard')->middleware('auth');
 /*Show add contact form route*/
-Route::get('add-contact', [PhoneBookController::class, 'showAddForm'])->name('contact.create');
+Route::get('add-contact', [PhoneBookController::class, 'showAddForm'])->name('contact.create')->middleware('auth');
 Route::post('/store-contact', [PhoneBookController::class, 'storeContact'])->name('store-contact');
 Route::post('/store', [UserController::class, 'storeUser'])->name('store-user');
 Route::post('/authenticate', [UserController::class, 'authenticateUser'])->name('authenticate');
@@ -18,3 +18,4 @@ Route::get('/contact', [PhoneBookController::class, 'getUserContacts'])->name('c
 Route::get('/contact/{id}', [PhoneBookController::class, 'getContactById']);
 /*Note: Phonebook*/
 Route::delete('/delete-contact', [PhoneBookController::class, 'destroyContact'])->name('phonebook.destroy');
+Route::post('/edit-contact', [PhoneBookController::class, 'editContact'])->name('phonebook.edit');

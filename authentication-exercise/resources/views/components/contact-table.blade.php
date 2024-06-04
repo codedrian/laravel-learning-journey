@@ -30,10 +30,10 @@
                                 <label for="checkbox-table-search-3" class="sr-only">checkbox</label>
                             </div>
                         </td>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" class="name px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" data-id="{{ $contact->id }}">
                             {{ $contact->name }}
                         </th>
-                        <td class="px-6 py-4">
+                        <td class="contact_number px-6 py-4">
                             {{ $contact->contact_number }}
                         </td>
                         <x-phonebook.buttons :contact="$contact"/>
