@@ -18,3 +18,4 @@ Route::get('/contact', [PhoneBookController::class, 'getUserContacts'])->name('c
 Route::get('/contact/{id}', [PhoneBookController::class, 'getContactById']);
 /*Note: Phonebook*/
 Route::delete('/delete-contact', [PhoneBookController::class, 'destroyContact'])->name('phonebook.destroy');
+Route::put('/edit-contact', [PhoneBookController::class, 'editContact'])->name('phonebook.edit');

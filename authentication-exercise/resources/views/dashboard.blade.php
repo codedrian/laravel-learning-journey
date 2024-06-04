@@ -14,7 +14,6 @@
             $('#profile').on('click', function () {
                 $('#profile-dropdown').toggle();
             })
-
             $("form[name='destroy-contact']").on('submit', function (event) {
                 event.preventDefault();
                 Swal.fire({
@@ -62,6 +61,52 @@
 
                     }
                 });
+            });
+            /*NOTE: Edit logic here*/ /*TODO: FIX THE BUG, CANNOT TARGET THE TH VALUE*/
+            $("form[name='edit-phonebook']").on('submit', async function (event) {
+                event.preventDefault()
+                const name = $(this).closest('tr').find('.name').text().trim()
+                const contactNumber = $(this).closest('tr').find('.contact_number').text().trim();
+                let id = $(this).closest('tr').find('.name').data('id');
+                let action = $(this).attr('action');
+                let csrfToken = $(this).find("input[name='_token']").val();
+                console.log(csrfToken);
+
+                const { value: formValues } = await Swal.fire({
+                    title: "Multiple inputs",
+                    html: `
+                            <input type="hidden" id="swal-input1" class="swal2-input" name="_token" value="${csrfToken}">
+                            <input type="hidden" id="swal-input2" class="swal2-input" name="id" value="${id}">
+                            <input id="swal-input3" class="swal2-input" name="name" value="${name}">
+                            <input id="swal-input4" class="swal2-input" name="contact_number" value="${contactNumber}">
+                          `,
+                    focusConfirm: false,
+                    preConfirm: () => {
+                        return [
+                            document.getElementById("swal-input1").value,
+                            document.getElementById("swal-input2").value,
+                            document.getElementById("swal-input3").value,
+                            document.getElementById("swal-input4").value,
+                        ];
+                    }
+                });
+                if (formValues) {
+                    /*if formValues have value*/
+                    console.log(formValues);
+                    $.ajax({
+                        url: action,
+                        method: 'POST',
+                        data: formValues,
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log(response);
+                        },
+                        error: function (xhr) {
+                            Swal.fire('Error!', 'Something went wrong!', 'error');
+                        }
+                    });
+                }
+
             });
         });
 
