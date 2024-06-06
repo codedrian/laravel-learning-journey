@@ -50,7 +50,7 @@ class UserController extends Controller
     public function getUserContacts()
     {
         $user = Auth::id();
-        $contacts = (new User())->getUserContacts($user);
+        $contacts = (new User())->getUserContacts();
         return view('dashboard', compact('contacts'));
     }
 

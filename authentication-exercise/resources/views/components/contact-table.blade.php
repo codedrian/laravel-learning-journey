@@ -11,6 +11,9 @@
                         </div>
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        No.
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Name
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -31,6 +34,9 @@
                             </div>
                         </td>
                         <th scope="row" class="name px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" data-id="{{ $contact->id }}">
+                            {{ $loop->iteration }}
+                        </th>
+                        <th scope="row" class="name px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" data-id="{{ $contact->id }}">
                             {{ $contact->name }}
                         </th>
                         <td class="contact_number px-6 py-4">
@@ -38,6 +44,7 @@
                         </td>
                         <x-phonebook.buttons :contact="$contact"/>
                     </tr>
+
                 @endforeach
                 </tbody>
             </table>

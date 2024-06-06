@@ -10,7 +10,7 @@
 </head>
 <body>
 <x-navbar></x-navbar>
-<h1>Contacts</h1>
+<h1>Contacts {{ Auth::user()->name }} {{ Auth::id() }}</h1>
 <x-contact-table :contacts="$contacts"/>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

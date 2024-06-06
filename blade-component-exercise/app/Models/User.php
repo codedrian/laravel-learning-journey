@@ -52,9 +52,8 @@ class User extends Authenticatable
         return [
             [
                 'id' => '1',
-                'title' => 'King/Queen of Westeros',
                 'salary' => '500,000',
-                'responsibilities' => 'Rule the Seven Kingdoms, strategic decision-making, diplomacy, maintaining power.'
+                'responsibilities' => ''
             ],
             [
                 'id' => '2',
